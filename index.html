@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pulse Relay</title>
+  <style>
+    body {
+      background-color: black;
+      color: #aaddff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    button {
+      background-color: #222;
+      border: 2px solid #aaddff;
+      color: #aaddff;
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #444;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <button onclick="pulseRelay()">Pulse Relay</button>
+
+  <script>
+    function pulseRelay() {
+      fetch('/pulse')
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.text();
+        })
+        .then(data => console.log(data))
+        .catch(error => console.error('Fetch error:', error));
+    }
+  </script>
+</body>
+</html>
